@@ -6,7 +6,7 @@ export default function AddProperty(props) {
 	return (
 		<div className={props.className}>
 			{/* Coming Soon */}
-			<Link href="/ComingSoon" passHref>
+			<Link href="/manageproperty/add-property" passHref>
 				<button className="flex justify-center items-center flex-col h-[297px] w-[297px] bg-[#EFEFEF] border rounded-3xl">
 					<div>
 						<Image src={yellowHouseIcon} className="pb-[10px]" />
