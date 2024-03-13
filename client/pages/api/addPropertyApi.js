@@ -1,5 +1,23 @@
-export default async function POST(req, res) {
-    console.log(req.body);  
-    res.status('200','Property Received')
-  }
-  
+import formidable from "formidable";
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+export default async (req, res) => {
+  const form = new formidable.IncomingForm();
+  let files;
+  let fields;
+  form.uploadDir = "./formfiles/";
+  form.keepExtensions = true;
+  let a = await form
+    .parse(req, (err, formFields, formFiles) => {
+      console.log(formFields);
+      files = formFiles;
+      fields = formFields;
+      console.log(files);
+    })
+
+};

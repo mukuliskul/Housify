@@ -4,14 +4,14 @@ export default function AddProperty() {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    fetch("/api/addPropertyApi", { method: "POST", body: formData });
+    fetch("/api/addPropertyApi", { method: "POST", body: formData});
   }
   return (
     <form
       method="post"
       onSubmit={handleSubmit}
       encType="multipart/form-data"
-      className="text-black w-full h-[600px] ml-[30px] mt-[30px] flex flex-col justify-around items-center"
+      className="text-black w-full h-[600px] ml-[30px] mt-[30px] flex flex-col justify-around items-start"
     >
       <label>
         Postal Code:
@@ -19,9 +19,61 @@ export default function AddProperty() {
           type="text"
           name="postal-code"
           id="postal-code"
-          placeholder="Postal Code"
+          placeholder="postal code"
           pattern="^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$"
           class="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
+          required
+        />
+      </label>
+
+      <label>
+        Street Address
+        <input
+          type="text"
+          name="postal-code"
+          id="postal-code"
+          placeholder="street address"
+          pattern="^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$"
+          class="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
+          required
+        />
+      </label>
+
+      <label>
+        City
+        <input
+          type="text"
+          name="postal-code"
+          id="postal-code"
+          placeholder="city"
+          pattern="^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$"
+          class="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
+          required
+        />
+      </label>
+
+      <label>
+        Province
+        <input
+          type="text"
+          name="postal-code"
+          id="postal-code"
+          placeholder="Province"
+          pattern="^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$"
+          class="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
+          required
+        />
+      </label>
+
+      <label
+        className="w-[400px] block mb-2 text-sm font-medium text-gray-900"
+        htmlFor="title-certificate"
+      >
+        Identification Proof
+        <input
+          name="title-certificate"
+          type="file"
+          className="w-full text-black text-lg bg-gray-100 file:cursor-pointer cursor-pointer file:border-0 file:py-3 file:px-4 file:mr-4 file:bg-primary file:hover:bg-[#062f9e] file:text-white rounded"
           required
         />
       </label>
@@ -38,8 +90,9 @@ export default function AddProperty() {
           required
         />
       </label>
+
       <label
-        className="block mb-2 text-sm font-medium text-gray-900"
+        className="w-[400px] block mb-2 text-sm font-medium text-gray-900"
         htmlFor="property-tax-receipts"
       >
         Property Tax Receipts
