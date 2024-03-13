@@ -1,7 +1,6 @@
 export default function About() {
   return (
     <div className="h-[8vh] text-black kumbh-sans-font">
-      <div className="py-10 px-5 md:px-20">
         <h1 className="text-4xl font-bold text-primary mb-10">About Housify</h1>
         <p className="mb-5">
           Housify is a groundbreaking platform dedicated to transforming the landscape of property management. By harmoniously integrating blockchain technology with artificial intelligence, we provide an unparalleled solution to the challenges faced by property owners, investors, and tenants.
@@ -20,6 +19,5 @@ export default function About() {
           We are committed to continuous innovation, driven by the needs of our users and the ever-changing landscape of the real estate market. Join us on this journey towards creating a more accessible and trustworthy real estate environment for everyone.
         </p>
       </div>
-    </div>
   );
 }

@@ -1,7 +1,6 @@
 export default function Features() {
   return (
     <div className="h-[8vh] text-black kumbh-sans-font">
-      <div className="py-10 px-5 md:px-20">
         <h1 className="text-4xl font-bold text-primary mb-10">Housify Features</h1>
         <h2 className="text-3xl font-bold text-primary mt-5 mb-5">Core Features</h2>
         <div className="mb-10">
@@ -27,6 +26,5 @@ export default function Features() {
           Housify is more than just a platform; it's a community dedicated to redefining the future of real estate. Discover how our features can simplify your property management experience today.
         </p>
       </div>
-    </div>
   );
 }

@@ -15,15 +15,13 @@ export default function Index() {
 	// })
 	return (
 		<div>
-			<div className="grid grid-cols-4 gap-y-[40px] h-[100vh] text-black kumbh-sans-font">
-				<div className="col-span-4 font-[15px] text-center py-auto">
-					<div className="w-[50%] mx-auto">
-						<p className="text-primary">
-							Welcome to Housify, your digital haven for streamlined property
-							management. Organize your documents effortlessly and craft leases
-							with ease. Let Housify simplify your property ownership journey.
-						</p>
-					</div>
+			<div className="grid grid-cols-4 h-[100vh] text-black kumbh-sans-font">
+				<div className="col-span-4 text-center py-auto w-[50%] mx-auto">
+					<p className="text-primary text-[20px]">
+						Welcome to Housify, your digital haven for streamlined property
+						management. Organize your documents effortlessly and craft leases
+						with ease. Let Housify simplify your property ownership journey.
+					</p>
 				</div>
 				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:ml-[50%]">
 					<Link href="/manageproperty" passHref>
