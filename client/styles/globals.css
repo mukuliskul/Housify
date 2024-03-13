@@ -1,51 +1,60 @@
-@font-face {
-  font-family: "Agrandir";
-  font-style: normal;
-  font-weight: 100 900;
-  src: url("../fonts/AgrandirVariable.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Telegraf";
-  font-style: normal;
-  font-weight: 100 900;
-  src: url("../fonts/TelegrafVariable.woff2") format("woff2");
-}
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Kumbh+Sans:wght@100..900&display=swap");
 @tailwind base;
-@layer base {
-  :root {
-    --color-accent: #6d57ff;
-    --color-secondary: #8A79FF;
-    --color-light: #f6f6f6;
-    --color-dark: #000;
-    --color-grey: #eee;
-  }
-
-  html {
-    @apply p-0 m-0 scroll-smooth w-full h-full;
-  }
-
-  html body {
-    @apply m-0 h-screen w-full bg-light text-black font-telegraf;
-  }
-
-  h1, h2, h3, h4 {
-    @apply font-agrandir font-bold;
-  }
-  h1 {
-    @apply text-5xl;
-  }
-
-  a {
-    @apply text-black;
-  }
-
-  button {
-    @apply font-telegraf font-bold;
-  }
-
-}
 @tailwind components;
 @tailwind utilities;
 
+/*Custom inter font used for home page*/
+.inter-font {
+	font-family: "Inter", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 700;
+	font-style: normal;
+	font-variation-settings: "slnt" 0;
+}
 
+.kumbh-sans-font {
+	font-family: "Kumbh Sans", sans-serif;
+	font-optical-sizing: auto;
+	font-style: normal;
+	font-variation-settings: "YOPQ" 300;
+}
+
+:root {
+	--foreground-rgb: 0, 0, 0;
+	--background-start-rgb: 214, 219, 220;
+	--background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--foreground-rgb: 255, 255, 255;
+		--background-start-rgb: 0, 0, 0;
+		--background-end-rgb: 0, 0, 0;
+	}
+}
+
+body {
+	color: white;
+}
+
+@layer utilities {
+	.text-balance {
+		text-wrap: balance;
+	}
+}
+
+.manage-property {
+	box-sizing: border-box;
+	background: linear-gradient(
+		159.1deg,
+		#1d4ed8 17.07%,
+		rgba(29, 78, 216, 0) 151.09%
+	);
+	border: 1px solid #ffe37d;
+	border-radius: 50px;
+}
+
+button {
+	cursor: pointer;
+}

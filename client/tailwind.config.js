@@ -1,40 +1,28 @@
-const { fontFamily, backgroundPosition } = require("tailwindcss/defaultTheme");
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-
-    // Or if using `src` directory:
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ['Helvetica Neue', ...fontFamily.sans],
-        serif: [...fontFamily.serif],
-        agrandir: ['Agrandir', ...fontFamily.sans],
-        telegraf: ['Telegraf', ...fontFamily.sans],
-      },
-      colors: {
-        accent: "var(--color-accent)",
-        secondary: "var(--color-secondary)",
-        light: "var(--color-light)",
-      },
-      backgroundImage: {
-        "heroImage": "url('/bg.png')",
-      },
-      keyframes: {
-        animategradient: {
-          '0%, 50%': { backgroundPosition: '0%, 50%' },
-          '50%, 100%': { backgroundPosition: '100%, 50%' },
-          '100%, 50%': { backgroundPositionposition: '0%, 50%' }
-        }
-
-      },
-    },
-  },
-  plugins: [],
-}
+	content: [
+		"./pages/**/*.{js,ts,jsx,tsx,mdx}",
+		"./components/**/*.{js,ts,jsx,tsx,mdx}",
+		"./app/**/*.{js,ts,jsx,tsx,mdx}",
+	],
+	theme: {
+		extend: {
+			backgroundImage: {
+				"gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+				"gradient-conic":
+					"conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+			},
+			colors: {
+				primary: "#1D4ED8",
+				secondary: "#6b7280",
+				accent: "#f3f4f6",
+				neutral: "#6b7280",
+				info: "#0ea5e9",
+				success: "#84cc16",
+				warning: "#eab308",
+				error: "#dc2626",
+			},
+		},
+	},
+	plugins: [],
+};
