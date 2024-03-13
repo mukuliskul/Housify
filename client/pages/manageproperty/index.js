@@ -1,4 +1,3 @@
-import Navbar from "@/components/navbar.js";
 import Property from "@/components/property.js";
 import AddProperty from "@/components/addProperty.js";
 export default function ManageProperty() {
@@ -7,7 +6,7 @@ export default function ManageProperty() {
     <>
       <div className="w-[100%] h-[100vh] text-black kumbh-sans-font">
       <h1 className="text-4xl font-bold text-primary mb-10">Manage Property</h1>
-        <div className="lg:w-[80%] mx-auto flex flex-col sm:flex-row justify-around items-center sm:flex-wrap">
+        <div className="lg:w-[80%] mx-auto flex flex-col md:flex-row justify-around items-center md:flex-wrap">
           {houses?.map((house) => {
             return (
               <Property address={house} key={house} className="m-[50px]"/>
