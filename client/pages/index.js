@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Image from "next/image";
-import Navbar from "@/components/navbar.js";
 import manageProperty from "@/public/icons/index/manage-property.svg";
 import generateDocuments from "@/public/icons/index/generate-documents.svg";
 import guide from "@/public/icons/index/guide.svg";
@@ -23,7 +22,7 @@ export default function Index() {
 						with ease. Let Housify simplify your property ownership journey.
 					</p>
 				</div>
-				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:ml-[50%]">
+				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:ml-[50%] lg:mt-0 mt-5">
 					<Link href="/manageproperty" passHref>
 						<Image
 							src={manageProperty}
@@ -38,7 +37,7 @@ export default function Index() {
 						</p>
 					</Link>
 				</div>
-				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:mr-[50%]">
+				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:mr-[50%] lg:mt-0 mt-5">
 					<Link href="/generate" passHref>
 						<Image
 							src={generateDocuments}
@@ -53,9 +52,9 @@ export default function Index() {
 						</p>
 					</Link>
 				</div>
-				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:ml-[50%]">
+				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:ml-[50%] lg:mt-0 mt-5">
 					{/* Coming Soon */}
-					<Link href="/ComingSoon" passHref>
+					<Link href="/guide" passHref>
 						<button>
 							<Image
 								src={guide}
@@ -71,7 +70,7 @@ export default function Index() {
 						</button>
 					</Link>
 				</div>
-				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:mr-[50%]">
+				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:mr-[50%] lg:mt-0 mt-5">
 					{/* Coming Soon */}
 					<Link href="/ComingSoon" passHref>
 						<button>
