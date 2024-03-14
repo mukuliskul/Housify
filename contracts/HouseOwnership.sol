@@ -21,7 +21,7 @@ contract HouseOwnershipRegistry {
         emit HouseRegistered(houseAddress, msg.sender);
     }
 
-    function verifyOwner(string memory houseAddress, address caller) public view returns (bool){
+    function verifyOwner(string memory houseAddress, address caller) public view{
         if (houseRegistry[houseAddress].owner == address(0)) {
             revert PropertyNotRegistered(houseAddress);
         }
