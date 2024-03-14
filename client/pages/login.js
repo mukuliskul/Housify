@@ -55,19 +55,15 @@ export default function Login() {
 						</div>
 					</div>
 					<div className="flex flex-col items-center justify-center mx-[10%] mt-[5%] sm:mt-[0%] col-span-2 sm:col-span-1">
-						<h1 className="text-[2.2em] text-[#1D4ED8] text-center font-[900]">
+						<h1 className="text-[2.2em] text-[#1D4ED8] text-center font-[900] mb-10">
 							WELCOME !
 						</h1>
-						<br />
-						<br />
-						<p className="text-[#1D4ED8] text-[1.1em] text-center">
+						<p className="text-[#1D4ED8] text-[1.1em] text-center mb-10">
 							Log in to your property powerhouse. Your one-stop hub for hassle
 							free leases and secure property document management. Let's get
 							started!
 						</p>
-						<br />
-						<br />
-						<div className="flex justify-center w-[100%]">
+						<div className="flex justify-center w-[100%] mb-10">
 							<button
 								className="bg-blue-700 w-[80%] sm:w-[70%] lg:w-[55%] h-[40px] text-[100%] rounded-md text-white mx-auto"
 								onClick={async () => {
@@ -82,8 +78,6 @@ export default function Login() {
 								Log in with MetaMask
 							</button>
 						</div>
-						<br />
-						<br />
 						<p className="text-[1em] text-center">
 							Don't have a MetaMask account?{" "}
 							<a
