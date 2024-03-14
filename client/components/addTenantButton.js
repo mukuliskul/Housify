@@ -6,9 +6,7 @@ export default function AddTenant(props) {
 			<Link href="/manageproperty/tenants/add-tenant" passHref>
 				<button className="flex justify-center items-center flex-col h-[100px] w-full bg-[#EFEFEF] border rounded-2xl">
 					<div>
-						<p className="text-black text-2xl ">
-                            Add Tenant
-						</p>
+						<p className="text-black text-2xl ">Add Tenant</p>
 					</div>
 				</button>
 			</Link>
