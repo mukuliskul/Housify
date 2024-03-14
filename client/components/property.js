@@ -19,16 +19,16 @@ export default function Property(props) {
 				<div className="flex flex-row justify-around text-white mt-[5px]">
 					{/* Coming Soon */}
 					<Link href="/ComingSoon" passHref>
-						<button className="bg-[#E4B300] w-[84px] h-[24px] border border-[#DDDDDD] rounded-md">
-							<p className="text-[12px] font-white drop-shadow-[0px_4px_4px_rgba(0, 0, 0, 0.25);]">
+						<button className="bg-[#E4B300] w-[84px] h-[28px] border border-[#DDDDDD] rounded-md">
+							<p className="text-[15px] font-white drop-shadow-[0px_4px_4px_rgba(0, 0, 0, 0.25);]">
 								Utility
 							</p>
 						</button>
 					</Link>
 					{/* Coming Soon */}
 					<Link href="/manageproperty/tenants" passHref>
-						<button className="bg-[#E4B300] w-[84px] h-[24px] border border-[#DDDDDD] rounded-md">
-							<p className="text-[12px] font-white drop-shadow-[0px_4px_4px_rgba(0, 0, 0, 0.25);]">
+						<button className="bg-[#E4B300] w-[84px] h-[28px] border border-[#DDDDDD] rounded-md">
+							<p className="text-[15px] font-white drop-shadow-[0px_4px_4px_rgba(0, 0, 0, 0.25);]">
 								Tenants
 							</p>
 						</button>
