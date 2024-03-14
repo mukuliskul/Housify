@@ -31,8 +31,6 @@ contract HouseOwnershipRegistry {
     }
 
     // Create
-    // TODO: INCLUDE apporpriate checks for edge cases in frontend
-    // TODO: Should I have an emit on blockchain to represent CRUD operations
     function addLease(string memory houseAddress, string memory documentIPFSHash, uint256 startDate, uint256 endDate, string memory tenantName) public{
         verifyOwner(houseAddress, msg.sender);
         Document memory newDocument = Document(documentIPFSHash, block.timestamp);
