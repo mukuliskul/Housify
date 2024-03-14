@@ -95,10 +95,6 @@ export default function AddTenant() {
 						</p>
 					</button>
 				</form>
-
-				<p className="text-xl text-tertiary italic my-10">
-					TO-TEST: handle form submit
-				</p>
 			</div>
 		</>
 	);
