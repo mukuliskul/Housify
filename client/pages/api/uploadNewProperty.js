@@ -1,3 +1,5 @@
+// TODO : ENCRYPT Documents
+
 import formidable from "formidable";
 import fs from "fs";
 const pinataSDK = require("@pinata/sdk");
@@ -41,9 +43,18 @@ export default async function handler(req, res) {
 				return res.status(500).send("Upload Error");
 			}
 			console.log(files);
-			const response = await saveFile(files.file);
-			const { IpfsHash } = response;
+			let response = await saveFile(files["identification-proof"]);
+			const { IpfsHashIdentificationProof } = response;
 
+			response = await saveFile(files["title-certificate"]);
+			const { IpfsHashTitle } = response;
+
+			response = await saveFile(files["property-tax-receipts"]);
+			const { IpfsHashPropertyTax } = response;
+
+			console.log(IpfsHashIdentificationProof);
+			console.log(IpfsHashTitle);
+			console.log(IpfsHashPropertyTax);
 			return res.send(IpfsHash);
 		});
 	} catch (e) {

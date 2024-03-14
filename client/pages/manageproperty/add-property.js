@@ -3,7 +3,7 @@ export default function AddProperty() {
 		e.preventDefault();
 		const form = e.target;
 		const formData = new FormData(form);
-		fetch("/api/addPropertyApi", { method: "POST", body: formData });
+		fetch("/api/uploadNewProperty", { method: "POST", body: formData });
 	}
 	return (
 		<>
@@ -19,8 +19,8 @@ export default function AddProperty() {
 						Street Address
 						<input
 							type="text"
-							name="postal-code"
-							id="postal-code"
+							name="street-address"
+							id="street-address"
 							placeholder="Street Address"
 							class="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
 							required
@@ -44,8 +44,8 @@ export default function AddProperty() {
 						City
 						<input
 							type="text"
-							name="postal-code"
-							id="postal-code"
+							name="city"
+							id="city"
 							placeholder="City"
 							class="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
 							required
@@ -79,11 +79,11 @@ export default function AddProperty() {
 
 					<label
 						className="w-[400px] block mb-2 font-medium text-gray-900"
-						htmlFor="title-certificate"
+						htmlFor="identification-proof"
 					>
 						Identification Proof
 						<input
-							name="title-certificate"
+							name="identification-proof"
 							type="file"
 							className="w-full text-black text-lg bg-gray-100 file:cursor-pointer cursor-pointer file:border-0 file:py-3 file:px-4 file:mr-4 file:bg-primary file:hover:bg-[#062f9e] file:text-white rounded"
 							required
