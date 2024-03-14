@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }) {
       <div
         className={router.pathname !== "/login" ? "py-10 md:px-10 px-5" : ""}
       >
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </div>
     </>
   );
