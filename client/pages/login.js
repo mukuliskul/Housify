@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { redirect } from "next/navigation";
-import Image from 'next/image'
-import housifyLogo from '@/public/icons/housify-logo.png'
+import Image from "next/image";
+import housifyLogo from "@/public/icons/housify-logo.png";
 
 export default function Login() {
   const [hasProvider, setHasProvider] = useState(null);
-  const initialState = { accounts: [] }; /* New */
-  const [wallet, setWallet] = useState(initialState); /* New */
+  const initialState = { accounts: [] };
+  const [wallet, setWallet] = useState(initialState);
 
   useEffect(() => {
     const getProvider = async () => {
@@ -19,16 +19,18 @@ export default function Login() {
   }, []);
 
   const updateWallet = async (accounts) => {
-    /* New */
-    setWallet({ accounts }); /* New */
-  }; /* New */
+    setWallet({ accounts });
+  };
 
   const handleConnect = async () => {
-    /* New */
-    let accounts = await window.ethereum.request({
-      /* New */ method: "eth_requestAccounts" /* New */,
-    }); /* New */
-    updateWallet(accounts); /* New */
+    if (!(await detectEthereumProvider({ silent: true }))) {
+      window.alert("Metamask not detected");
+    } else {
+      let accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      updateWallet(accounts);
+    }
   };
   return (
     <div>
@@ -36,7 +38,12 @@ export default function Login() {
         <div className="grid grid-cols-2 items-center lg:flex-row w-screen h-screen bg-white text-black">
           <div className="flex flex-col justify-center items-center col-span-2 sm:col-span-1">
             <div className="logo h-[400px] w-[400px] rounded-xl mx-auto flex justify-center items-center">
-              <Image src={housifyLogo} height={300} width={300} className="mx-auto"/>
+              <Image
+                src={housifyLogo}
+                height={300}
+                width={300}
+                className="mx-auto"
+              />
             </div>
           </div>
           <div className="flex flex-col items-center justify-center mx-[10%] mt-[5%] sm:mt-[0%] col-span-2 sm:col-span-1">
@@ -56,13 +63,11 @@ export default function Login() {
               <button
                 className="bg-blue-700 w-[80%] sm:w-[70%] lg:w-[55%] h-[40px] text-[100%] rounded-md text-white mx-auto"
                 onClick={async () => {
-                  try {
-                    redirect("/about");
-                  } catch (error) {
-                    console.log(error);
-                  }
                   await handleConnect();
                   if (wallet.accounts.length > 0) {
+                    redirect("/about");
+                  } else {
+                    document.alert("Log in failed");
                   }
                 }}
               >

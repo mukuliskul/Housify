@@ -1,6 +1,8 @@
 import { Html, Head, Main, NextScript } from "next/document";
-import Navbar from '@/components/navbar.js'
+import { useRouter } from "next/router";
+import Navbar from "@/components/navbar.js";
 export default function Document() {
+  const router = useRouter();
   return (
     <Html lang="en">
       <Head />
