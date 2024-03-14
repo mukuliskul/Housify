@@ -82,7 +82,7 @@ export default function Login() {
               Don't have a MetaMask account?{" "}
               <a
                 className="font-medium text-blue-500 hover:underline"
-                href="https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn"
+                href="https://metamask.io/download/"
               >
                 Click here to get started.
               </a>
