@@ -5,6 +5,17 @@
 				"internalType": "address",
 				"name": "caller",
 				"type": "address"
+			}
+		],
+		"name": "NoProperties",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "caller",
+				"type": "address"
 			},
 			{
 				"internalType": "string",
@@ -32,6 +43,25 @@
 			{
 				"indexed": false,
 				"internalType": "string",
+				"name": "currentHouseAddress",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "newHouseAddress",
+				"type": "string"
+			}
+		],
+		"name": "HouseAddressUpdated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
 				"name": "houseAddress",
 				"type": "string"
 			},
@@ -43,6 +73,25 @@
 			}
 		],
 		"name": "HouseRegistered",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "houseAddress",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "newIpfsHash",
+				"type": "string"
+			}
+		],
+		"name": "IpfsHashUpdated",
 		"type": "event"
 	},
 	{
@@ -569,6 +618,25 @@
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "caller",
+				"type": "address"
+			}
+		],
+		"name": "getPropertyAddress",
+		"outputs": [
+			{
+				"internalType": "string[]",
+				"name": "",
+				"type": "string[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "string",
 				"name": "houseAddress",
 				"type": "string"
@@ -833,6 +901,42 @@
 			}
 		],
 		"name": "removeUtilityBill",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "currentHouseAddress",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "newHouseAddress",
+				"type": "string"
+			}
+		],
+		"name": "updatePropertyAddress",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "currentHouseAddress",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "newIpfsHash",
+				"type": "string"
+			}
+		],
+		"name": "updatePropertyIpfsHash",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"

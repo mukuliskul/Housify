@@ -6,30 +6,37 @@ import aiLogo from "@/public/icons/generate/ailogo.svg";
 const SUMMARIZE_URL = "/api/summarize";
 
 export default function Generate() {
-  //Stores all text messages
   const [messages, setMessages] = useState([
     { sender: "system", content: "Please upload the file to be summarized" },
   ]);
+  const [summary, setSummary] = useState("");
+
+  const [sessionId, setSessionId] = useState("");
 
   const [userInput, setUserInput] = useState("");
 
   //Will be used to show loading message to user later
   const [isLoading, setIsLoading] = useState(false);
-
   //Calls api and adds the response to messages
   const summarizeText = (text) => {
-    // setIsLoading(true);
+    const newSessionId = Date.now().toString(); // Generate a unique session ID
+    setSessionId(newSessionId); // Set the session ID
+
+    //setIsLoading(true);
     fetch(SUMMARIZE_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ text }),
+      body: JSON.stringify({
+        text,
+        sessionId: newSessionId,
+        isInitialMessage: true,
+      }),
     })
       .then((res) => res.json())
       .then((data) => {
-        // setIsLoading(false);
-        // Update to use setMessages to show summary in chat
+        //setIsLoading(false);
         setMessages((prev) => [
           ...prev,
           { sender: "system", content: data.message },
@@ -37,7 +44,7 @@ export default function Generate() {
       })
       .catch((error) => {
         console.error("Error summarizing text:", error);
-        // setIsLoading(false);
+        //setIsLoading(false);
       });
   };
 
@@ -83,6 +90,32 @@ export default function Generate() {
   //Adds a user message to messages if its not empty
   const sendMessage = () => {
     if (!userInput.trim()) return;
+
+    setIsLoading(true);
+    fetch(SUMMARIZE_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        text: userInput,
+        sessionId,
+        isInitialMessage: false,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setIsLoading(false);
+        setMessages((prev) => [
+          ...prev,
+          { sender: "system", content: data.message },
+        ]);
+      })
+      .catch((error) => {
+        console.error("Error sending message:", error);
+        setIsLoading(false);
+      });
+
     setMessages((prev) => [...prev, { sender: "user", content: userInput }]);
     setUserInput("");
   };
@@ -127,14 +160,18 @@ export default function Generate() {
             <div className="flex flex-col max-w-[350px] justify-around m-5 space-y-5">
               <button
                 type="button"
-                className="w-full bg-primary h-14 rounded-2xl text-white font-medium text-xl px-2"
+                className="w-full bg-primary h-14 rounded-2xl text-white font-medium text-xl px-2 hover:bg-[#5280F2]"
               >
                 Generate document with AI
-                <Image src={aiLogo} className="inline h-[0.7em] mb-2"></Image>
+                <Image
+                  src={aiLogo}
+                  className="inline h-[0.7em] mb-2"
+                  alt="AI Logo"
+                ></Image>
               </button>
               <button
                 type="button"
-                className="w-full bg-primary h-12 rounded-2xl text-white font-medium text-xl px-2"
+                className="w-full bg-primary h-12 rounded-2xl text-white font-medium text-xl px-2 hover:bg-[#5280F2]"
               >
                 Download Document
               </button>
@@ -154,14 +191,11 @@ export default function Generate() {
             {messages.map((msg, index) => (
               <div
                 key={index}
-                className={`message w-[400px]` 
-                //  ${
-                //   msg.sender === "user" ? "text-right" : "text-left"
-                // }`
-              }
+                className={`message w-[80%] 
+                   ${msg.sender === "user" ? "text-right" : "text-left"}`}
               >
                 <p
-                  className={`inline-block p-2 rounded-lg w-[78%] ${
+                  className={`inline-block p-2 rounded-lg w-[100%] ${
                     msg.sender === "user"
                       ? "bg-blue-500 text-white mt-2 mr-2 self-end"
                       : "bg-red-400 mt-2 ml-2 self-start"
@@ -182,7 +216,7 @@ export default function Generate() {
             </button>
             <input
               type="text"
-              className="w-full px-2 rounded-lg border border-black" 
+              className="w-full px-2 rounded-lg border border-black"
               value={userInput}
               onChange={(e) => setUserInput(e.target.value)}
               onKeyPress={(e) => e.key === "Enter" && sendMessage()}
