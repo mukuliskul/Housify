@@ -1,5 +1,4 @@
 // TODO : ENCRYPT Documents
-
 import formidable from "formidable";
 import fs from "fs";
 const pinataSDK = require("@pinata/sdk");
@@ -13,12 +12,13 @@ export const config = {
 	},
 };
 
-const saveFile = async (file) => {
+const saveFile = async (file, customFileName) => {
 	try {
 		const stream = fs.createReadStream(file.filepath);
 		const options = {
 			pinataMetadata: {
-				name: file.originalFilename,
+				// stored in the format : callerAddress-file-name
+				name: customFileName,
 			},
 		};
 		const response = await pinata.pinFileToIPFS(stream, options);
@@ -50,9 +50,18 @@ export default async function handler(req, res) {
 		const result = await parseForm();
 
 		const ipfsHashes = await Promise.all([
-			saveFile(result.files["identification-proof"]),
-			saveFile(result.files["title-certificate"]),
-			saveFile(result.files["property-tax-receipts"]),
+			saveFile(
+				result.files["identification-proof"],
+				`${result.fields.callerAddress}-${result.fields["street-address"]}-identification-proof`
+			),
+			saveFile(
+				result.files["title-certificate"],
+				`${result.fields.callerAddress}-${result.fields["street-address"]}-title-certificate`
+			),
+			saveFile(
+				result.files["property-tax-receipts"],
+				`${result.fields.callerAddress}-${result.fields["street-address"]}-property-tax-receipts`
+			),
 		]);
 
 		let propertyAddress = `${result.fields["street-address"]}, ${result.fields["city"]}, ${result.fields["province"]}, ${result.fields["postal-code"]}`;

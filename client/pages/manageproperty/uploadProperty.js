@@ -3,14 +3,14 @@ const { ethers } = require("ethers");
 // Contract details
 
 export default function AddProperty() {
-	async function registerPropertyOnBlockchain(propertyAddress, titleIpfsHash) {
+	async function registerPropertyOnBlockchain(
+		propertyAddress,
+		titleIpfsHash,
+		signer
+	) {
 		try {
 			const contractABI = require("@/utils/HouseOwnershipRegistryABI.json");
 			const contractAddress = process.env.NEXT_PUBLIC_DEPLOYED_CONTRACT_ADDRESS;
-			console.log(contractAddress);
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
-			await provider.send("eth_requestAccounts", []);
-			const signer = provider.getSigner();
 
 			const contract = new ethers.Contract(
 				contractAddress,
@@ -34,6 +34,13 @@ export default function AddProperty() {
 		const form = e.target;
 		const formData = new FormData(form);
 		try {
+			const provider = new ethers.providers.Web3Provider(window.ethereum);
+			await provider.send("eth_requestAccounts", []);
+			const signer = provider.getSigner();
+			const address = await signer.getAddress(); // Fetch the signer's address
+
+			formData.append("callerAddress", address);
+
 			let response = await fetch("/api/uploadNewProperty", {
 				method: "POST",
 				body: formData,
@@ -45,7 +52,8 @@ export default function AddProperty() {
 			const data = await response.json(); // Extract the JSON response
 			await registerPropertyOnBlockchain(
 				data.propertyAddress,
-				data.ipfsHashes.title
+				data.ipfsHashes.title,
+				signer
 			);
 			console.log("Success:", data);
 		} catch (error) {
