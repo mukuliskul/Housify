@@ -6,20 +6,17 @@ import aiLogo from "@/public/icons/generate/ailogo.svg";
 const SUMMARIZE_URL = "/api/summarize";
 
 export default function Generate() {
-  //Stores all text messages
   const [messages, setMessages] = useState([
     { sender: "system", content: "Please upload the file to be summarized" },
   ]);
+  const [summary, setSummary] = useState("");
+
+  const [sessionId, setSessionId] = useState("");
 
   const [userInput, setUserInput] = useState("");
 
   //Will be used to show loading message to user later
   const [isLoading, setIsLoading] = useState(false);
-
-  const [summary, setSummary] = useState("");
-
-  const [sessionId, setSessionId] = useState("");
-
   //Calls api and adds the response to messages
   const summarizeText = (text) => {
     const newSessionId = Date.now().toString(); // Generate a unique session ID
