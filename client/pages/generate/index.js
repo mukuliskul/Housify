@@ -154,11 +154,8 @@ export default function Generate() {
             {messages.map((msg, index) => (
               <div
                 key={index}
-                className={`message w-[400px]` 
-                //  ${
-                //   msg.sender === "user" ? "text-right" : "text-left"
-                // }`
-              }
+                className={`message w-[400px] 
+                   ${msg.sender === "user" ? "text-right" : "text-left"}`}
               >
                 <p
                   className={`inline-block p-2 rounded-lg w-[78%] ${
@@ -182,7 +179,7 @@ export default function Generate() {
             </button>
             <input
               type="text"
-              className="w-full px-2 rounded-lg border border-black" 
+              className="w-full px-2 rounded-lg border border-black"
               value={userInput}
               onChange={(e) => setUserInput(e.target.value)}
               onKeyPress={(e) => e.key === "Enter" && sendMessage()}
