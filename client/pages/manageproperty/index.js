@@ -1,14 +1,17 @@
 const ethers = require("ethers");
 import Property from "@/components/property.js";
 import AddProperty from "@/components/addPropertyButton.js";
+import { useEffect, useState } from "react";
 
 export default function ManageProperty() {
-	async function getPropertyDetails() {
+	const [houses, setHouses] = useState([]);
+
+	async function getAllProperties() {
 		try {
 			const contractABI = require("@/utils/HouseOwnershipRegistryABI.json");
 			const contractAddress = process.env.NEXT_PUBLIC_DEPLOYED_CONTRACT_ADDRESS;
 
-			const provider = new ethers.BrowserProvider(window.ethereum);
+			const provider = new ethers.providers.Web3Provider(window.ethereum);
 			await provider.send("eth_requestAccounts", []);
 			const signer = await provider.getSigner();
 			const address = await signer.getAddress();
@@ -19,20 +22,23 @@ export default function ManageProperty() {
 				signer
 			);
 
-			const ownedProperties = await contract.getDocumentHash(address);
-
+			let ownedProperties = await contract.getPropertyAddress(address);
+			console.log(ownedProperties);
+			setHouses(ownedProperties);
+			/* 
 			for (const propertyAddress of ownedProperties) {
 				const documentHash = await contract.getDocumentHash(propertyAddress);
 				console.log(`Property ${propertyAddress} hash: `, documentHash);
-			}
+			} */
 		} catch (error) {
 			console.error("Error getting IPFS hash: ", error);
 		}
 	}
-	let houses = [
-		"99 xyz avenue, North York, ON M2H 2K1",
-		"999 xyz street, North York, ON M2H 1K8",
-	];
+
+	useEffect(() => {
+		getAllProperties();
+	}, []);
+
 	return (
 		<>
 			<div className="w-[100%] h-[100vh] text-black kumbh-sans-font">
