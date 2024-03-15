@@ -2,16 +2,10 @@
 
 import formidable from "formidable";
 import fs from "fs";
-import { ethers } from "ethers";
 const pinataSDK = require("@pinata/sdk");
 
 // Initialize Pinata SDK
 const pinata = new pinataSDK({ pinataJWTKey: process.env.PINATA_JWT });
-
-// Contract details
-const contractABI =
-	require("../../artifacts/contracts/HouseOwnership.sol/HouseOwnershipRegistry.json").abi;
-const contractAddress = "0x2e5D496aC79531Bc0CC6Fbb99cab053E379eb572";
 
 export const config = {
 	api: {
@@ -48,22 +42,32 @@ export default async function handler(req, res) {
 			return new Promise((resolve, reject) => {
 				form.parse(req, (err, fields, files) => {
 					if (err) reject(err);
-					else resolve(files);
+					else resolve({ fields, files });
 				});
 			});
 		};
 
-		const files = await parseForm();
+		const result = await parseForm();
 
 		const ipfsHashes = await Promise.all([
-			saveFile(files["identification-proof"]),
-			saveFile(files["title-certificate"]),
-			saveFile(files["property-tax-receipts"]),
+			saveFile(result.files["identification-proof"]),
+			saveFile(result.files["title-certificate"]),
+			saveFile(result.files["property-tax-receipts"]),
 		]);
 
-		const [identificationProof, title, propertyTax] = ipfsHashes;
+		let propertyAddress = `${result.fields["street-address"]}, ${result.fields["city"]}, ${result.fields["province"]}, ${result.fields["postal-code"]}`;
 
-		console.log({ identificationProof, title, propertyTax });
+		res.json({
+			success: true,
+			ipfsHashes: {
+				identificationProof: ipfsHashes[0],
+				title: ipfsHashes[1],
+				propertyTax: ipfsHashes[2],
+			},
+			propertyAddress: propertyAddress,
+		});
+
+		//console.log({ identificationProof, title, propertyTax });
 		//res.json({ identificationProof, title, propertyTax });
 	} catch (error) {
 		console.error(error);

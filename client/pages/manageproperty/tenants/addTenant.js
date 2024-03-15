@@ -41,7 +41,7 @@ export default function AddTenant() {
 							name="tenant-name"
 							id="tenant-name"
 							placeholder="Name"
-							class="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
+							className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
 							required
 						/>
 					</label>
@@ -54,7 +54,7 @@ export default function AddTenant() {
 							id="start-date"
 							value={startDate}
 							onChange={handleStartDateChange}
-							class="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
+							className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
 							required
 						/>
 					</label>
@@ -68,7 +68,7 @@ export default function AddTenant() {
 							value={endDate}
 							onChange={handleEndDateChange}
 							min={startDate}
-							class="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
+							className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
 							required
 						/>
 					</label>
