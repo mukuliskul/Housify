@@ -3,7 +3,7 @@ import AddProperty from "@/components/addPropertyButton.js";
 export default function ManageProperty() {
 	let houses = [
 		"99 xyz avenue, North York, ON M2H 2K1",
-		"999 xyz street, North York, ON M2H 1K8",
+		"999 xyz street, North York, ON M2H 1K8"
 	];
 	return (
 		<>
@@ -11,13 +11,13 @@ export default function ManageProperty() {
 				<h1 className="text-4xl font-bold text-primary mb-10">
 					Manage Property
 				</h1>
-				<div className="lg:w-[80%] mx-auto flex flex-col md:flex-row justify-around items-center md:flex-wrap">
+				<div className="flex flex-col lg:flex-row lg:justify-evenly items-center flex-wrap">
 					{houses?.map((house) => {
 						return (
-							<Property address={house} key={house} className="m-[50px]" />
+							<Property address={house} key={house} className="mt-10 mx-[25px]" />
 						);
 					})}
-					<AddProperty className="m-[50px]" />
+					<AddProperty className="mt-10 mx-[25px]" />
 				</div>
 			</div>
 		</>
