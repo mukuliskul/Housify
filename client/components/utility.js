@@ -13,7 +13,7 @@ export default function Utility(props) {
 							{props.utility.file_name}
 						</p>
 						<p>
-							<strong>Start Date: </strong>
+							<strong>Next due: </strong>
 							{props.utility.next_due}
 						</p>
 					</div>
