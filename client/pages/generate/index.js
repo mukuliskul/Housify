@@ -9,7 +9,6 @@ export default function Generate() {
   const [messages, setMessages] = useState([
     { sender: "system", content: "Please upload the file to be summarized" },
   ]);
-  const [summary, setSummary] = useState("");
 
   const [sessionId, setSessionId] = useState("");
 
@@ -187,18 +186,18 @@ export default function Generate() {
           <div className="bg-primary rounded-t-lg text-center p-2 text-white font-medium text-lg">
             Ask AI for Help
           </div>
-          <div className="bg-gray-200 h-[60vh] overflow-y-auto flex flex-col">
+          <div className="h-[60vh] overflow-y-auto flex flex-col">
             {messages.map((msg, index) => (
               <div
                 key={index}
-                className={`message w-[80%] 
-                   ${msg.sender === "user" ? "text-right" : "text-left"}`}
+                className={`message max-w-[80%] 
+                   ${msg.sender === "user" ? " text-left self-end" : "text-left self-start mr-2 box-border"}`}
               >
                 <p
                   className={`inline-block p-2 rounded-lg w-[100%] ${
                     msg.sender === "user"
-                      ? "bg-blue-500 text-white mt-2 mr-2 self-end"
-                      : "bg-red-400 mt-2 ml-2 self-start"
+                      ? "mt-2 border border-black"
+                      : "bg-gray-200 mt-2 ml-2 self-start"
                   }`}
                 >
                   {msg.content}
@@ -206,7 +205,7 @@ export default function Generate() {
               </div>
             ))}
           </div>
-          <div className="flex flex-row bg-white border-t border-black p-2">
+          <div className="flex flex-row bg-white border-t border-black p-2 mt-[4px]">
             <button
               type="button"
               className="w-auto bg-primary h-auto pb-2 px-3 mr-2 rounded-2xl text-white font-medium text-3xl"

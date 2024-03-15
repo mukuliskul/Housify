@@ -5,6 +5,7 @@ const openai = new OpenAI();
 let chatSessions = {};
 
 export default async function handler(req, res) {
+  
   const { sessionId, text, isInitialMessage } = req.body;
   try {
     let messages;
@@ -22,7 +23,7 @@ export default async function handler(req, res) {
 
     const completion = await openai.chat.completions.create({
       messages: messages,
-      model: "gpt-4-0125-preview",
+      model: "gpt-3.5-turbo-0125",
       temperature: 0,
     });
 
