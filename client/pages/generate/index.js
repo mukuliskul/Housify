@@ -3,7 +3,7 @@ import Image from "next/image";
 import fileIcon from "@/public/icons/file-icon.svg";
 import aiLogo from "@/public/icons/generate/ailogo.svg";
 
-const SUMMARIZE_URL = "http://localhost:3000/api/summarize";
+const SUMMARIZE_URL = "/api/summarize";
 
 export default function Generate() {
   //Stores all text messages
@@ -16,20 +16,30 @@ export default function Generate() {
   //Will be used to show loading message to user later
   const [isLoading, setIsLoading] = useState(false);
 
+  const [summary, setSummary] = useState("");
+
+  const [sessionId, setSessionId] = useState("");
+
   //Calls api and adds the response to messages
   const summarizeText = (text) => {
-    // setIsLoading(true);
+    const newSessionId = Date.now().toString(); // Generate a unique session ID
+    setSessionId(newSessionId); // Set the session ID
+
+    //setIsLoading(true);
     fetch(SUMMARIZE_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ text }),
+      body: JSON.stringify({
+        text,
+        sessionId: newSessionId,
+        isInitialMessage: true,
+      }),
     })
       .then((res) => res.json())
       .then((data) => {
-        // setIsLoading(false);
-        // Update to use setMessages to show summary in chat
+        //setIsLoading(false);
         setMessages((prev) => [
           ...prev,
           { sender: "system", content: data.message },
@@ -37,7 +47,7 @@ export default function Generate() {
       })
       .catch((error) => {
         console.error("Error summarizing text:", error);
-        // setIsLoading(false);
+        //setIsLoading(false);
       });
   };
 
@@ -83,6 +93,32 @@ export default function Generate() {
   //Adds a user message to messages if its not empty
   const sendMessage = () => {
     if (!userInput.trim()) return;
+
+    setIsLoading(true);
+    fetch(SUMMARIZE_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        text: userInput,
+        sessionId,
+        isInitialMessage: false,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setIsLoading(false);
+        setMessages((prev) => [
+          ...prev,
+          { sender: "system", content: data.message },
+        ]);
+      })
+      .catch((error) => {
+        console.error("Error sending message:", error);
+        setIsLoading(false);
+      });
+
     setMessages((prev) => [...prev, { sender: "user", content: userInput }]);
     setUserInput("");
   };
@@ -130,7 +166,11 @@ export default function Generate() {
                 className="w-full bg-primary h-14 rounded-2xl text-white font-medium text-xl px-2 hover:bg-[#5280F2]"
               >
                 Generate document with AI
-                <Image src={aiLogo} className="inline h-[0.7em] mb-2" alt="AI Logo"></Image>
+                <Image
+                  src={aiLogo}
+                  className="inline h-[0.7em] mb-2"
+                  alt="AI Logo"
+                ></Image>
               </button>
               <button
                 type="button"
