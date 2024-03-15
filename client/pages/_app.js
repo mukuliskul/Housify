@@ -10,11 +10,11 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     if (typeof window !== "undefined" && window.ethereum) {
       window.ethereum.request({ method: "eth_accounts" }).then((accounts) => {
-        return console.log(accounts);
+        console.log(accounts);
+        if (accounts.length == 0) {
+          router.push("/login");
+        }
       });
-      if (!window.ethereum.request({ method: "eth_accounts" })) {
-        router.push("/login");
-      }
     } else {
       router.push("/login");
     }
