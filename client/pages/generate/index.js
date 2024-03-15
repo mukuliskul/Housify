@@ -3,7 +3,7 @@ import Image from "next/image";
 import fileIcon from "@/public/icons/file-icon.svg";
 import aiLogo from "@/public/icons/generate/ailogo.svg";
 
-const SUMMARIZE_URL = "http://localhost:3000/api/summarize";
+const SUMMARIZE_URL = "/api/summarize";
 
 export default function Generate() {
   //Stores all text messages
