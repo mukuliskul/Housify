@@ -13,12 +13,18 @@ export default function Navbar() {
 		<>
 			<nav className="lg:px-10 px-5 flex w-full flex-col lg:flex-row lg:justify-evenly h-[100%] font-medium text-[20px] items-center border-black border-b-[1px] text-primary lg:pb-0 pb-2">
 				<Link href="/" passHref>
-					<Image src={"/icons/Nav-logo.svg"} width={200} height={200} />
+					<Image
+						src={"/icons/Nav-logo.svg"}
+						width={200}
+						height={200}
+						alt="Housify icon"
+						priority={true}
+					/>
 				</Link>
 				<div className="block lg:hidden">
 					<button
 						onClick={() => setIsOpen(!isOpen)}
-						className="flex items-center px-3 py-2 border bg-white rounded text-black border-black border-2px font-extrabold hover:bg-[#909090]"
+						className="flex items-center px-3 py-2 border bg-white rounded text-black border-black border-2px font-extrabold hover:bg-[#D0D0D0]"
 					>
 						<svg
 							className="fill-current h-3 w-3"
@@ -45,7 +51,7 @@ export default function Navbar() {
 						<a className="block lg:inline-block">Features</a>
 					</Link>
 					<button
-						className="bg-primary text-white border-[1px] rounded-3xl h-[33px] w-[80px] font-extrabold hover:bg-[#1040c7]"
+						className="bg-primary text-white border-[1px] rounded-3xl h-[33px] w-[80px] font-extrabold hover:bg-[#5280F2]"
 						onClick={handleLogout}
 					>
 						Logout
