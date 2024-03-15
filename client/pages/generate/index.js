@@ -130,7 +130,7 @@ export default function Generate() {
                 className="w-full bg-primary h-14 rounded-2xl text-white font-medium text-xl px-2 hover:bg-[#5280F2]"
               >
                 Generate document with AI
-                <Image src={aiLogo} className="inline h-[0.7em] mb-2"></Image>
+                <Image src={aiLogo} className="inline h-[0.7em] mb-2" alt="AI Logo"></Image>
               </button>
               <button
                 type="button"
@@ -154,11 +154,11 @@ export default function Generate() {
             {messages.map((msg, index) => (
               <div
                 key={index}
-                className={`message w-[400px] 
+                className={`message w-[80%] 
                    ${msg.sender === "user" ? "text-right" : "text-left"}`}
               >
                 <p
-                  className={`inline-block p-2 rounded-lg w-[78%] ${
+                  className={`inline-block p-2 rounded-lg w-[100%] ${
                     msg.sender === "user"
                       ? "bg-blue-500 text-white mt-2 mr-2 self-end"
                       : "bg-red-400 mt-2 ml-2 self-start"
