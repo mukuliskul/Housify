@@ -1,5 +1,6 @@
-import Image from 'next/image';
-import fileIcon from '@/public/icons/file-icon.svg';
+import Image from "next/image";
+import fileIcon from "@/public/icons/file-icon.svg";
+import aiLogo from "@/public/icons/generate/ailogo.svg"
 
 export default function Generate() {
   return (
@@ -8,7 +9,9 @@ export default function Generate() {
         <h1 className="text-4xl font-bold text-primary mb-2 lg:mb-10">Generate Documents</h1>
         <form className="flex flex-col flex-start">
           <div>
-            <label className="block font-semibold text-3xl">Select Document:</label>
+            <label className="block font-semibold text-3xl">
+              Select Document:
+            </label>
             <select
               id="doctype"
               name="document-type"
@@ -20,11 +23,16 @@ export default function Generate() {
           </div>
           <div className="flex lg:flex-row justify-left mt-5">
             <div className="w-[35%] max-w-[250px] border border-black bg-white rounded-lg max-w-xs">
-              <Image src={fileIcon} alt="file icon" className="mx-auto py-[50%]" />
+              <Image
+                src={fileIcon}
+                alt="file icon"
+                className="mx-auto py-[50%]"
+              />
             </div>
             <div className="flex flex-col max-w-[350px] justify-around m-5 space-y-5">
               <button type="button" className="w-full bg-primary h-14 rounded-2xl text-white font-medium text-xl px-2">
                 Generate document with AI
+                <Image src={aiLogo} className="inline h-[0.8em]"></Image>
               </button>
               <button type="button" className="w-full bg-primary h-12 rounded-2xl text-white font-medium text-lg px-2">
                 Download Document
