@@ -8,10 +8,10 @@ export default function ManageProperty() {
 			const contractABI = require("@/utils/HouseOwnershipRegistryABI.json");
 			const contractAddress = process.env.NEXT_PUBLIC_DEPLOYED_CONTRACT_ADDRESS;
 
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
+			const provider = new ethers.BrowserProvider(window.ethereum);
 			await provider.send("eth_requestAccounts", []);
-			const signer = provider.getSigner();
-			const address = await signer.getAddress(); // Fetch the signer's address
+			const signer = await provider.getSigner();
+			const address = await signer.getAddress();
 
 			const contract = new ethers.Contract(
 				contractAddress,
@@ -27,7 +27,6 @@ export default function ManageProperty() {
 			}
 		} catch (error) {
 			console.error("Error getting IPFS hash: ", error);
-			//return res.status(500).json({ error: "Failed to register house" });
 		}
 	}
 	let houses = [

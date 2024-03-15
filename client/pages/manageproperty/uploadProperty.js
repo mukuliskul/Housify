@@ -34,7 +34,7 @@ export default function AddProperty() {
 		const form = e.target;
 		const formData = new FormData(form);
 		try {
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
+			const provider = new ethers.BrowserProvider(window.ethereum);
 			await provider.send("eth_requestAccounts", []);
 			const signer = provider.getSigner();
 			const address = await signer.getAddress(); // Fetch the signer's address

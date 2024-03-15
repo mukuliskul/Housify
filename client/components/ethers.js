@@ -10,7 +10,7 @@ const ContractInteractionComponent = () => {
 		const fetchData = async () => {
 			if (typeof window.ethereum !== "undefined") {
 				await window.ethereum.request({ method: "eth_requestAccounts" });
-				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				const provider = new ethers.BrowserProvider(window.ethereum);
 				const signer = provider.getSigner();
 				const contract = new ethers.Contract(
 					0x2e5d496ac79531bc0cc6fbb99cab053e379eb572,
