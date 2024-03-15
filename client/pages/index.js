@@ -46,7 +46,8 @@ export default function Index() {
 							alt="Generate Documents Icon"
 						/>
 						<p className="kumbh-sans font-bold text-white text-[20px]">
-							Generate
+							Generate /
+							Interpret
 							<br />
 							Documents
 						</p>

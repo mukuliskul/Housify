@@ -11,7 +11,7 @@ export default function Guide() {
         <ol className="list-decimal pl-10 mb-10">
             <li>Visit the Housify homepage.</li>
             <li>Click on "Connect with MetaMask".</li>
-            <li>MetaMask is the official wallet supported by Housify (<a className="text-primary underline" href="https://metamask.io/" target="_blank">Learn More</a> , <a className="text-primary underline" href="https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn" target="_blank">Install MetaMask</a>).</li>
+            <li>MetaMask is the official wallet supported by Housify (<a className="text-primary hover:underline" href="https://metamask.io/" target="_blank">Learn More</a> , <a className="text-primary hover:underline" href="https://metamask.io/download/" target="_blank">Install MetaMask</a>).</li>
         </ol>
         <h2 className="text-3xl text-primary mb-7">Dashboard Overview</h2>
         <p className="mb-5">Your dashboard is the control center, featuring document management, property management, Housify Guide, and Profile management. We provide you snippets of Housify to help you navigate the dashboard easily, ensuring you can make the most of the AI-driven recommendations for efficient document management.</p>
