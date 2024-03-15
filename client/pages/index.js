@@ -22,7 +22,7 @@ export default function Index() {
 						with ease. Let Housify simplify your property ownership journey.
 					</p>
 				</div>
-				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:ml-[50%] lg:mt-0 mt-5">
+				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:ml-[50%] lg:mt-0 mt-5 hover:opacity-80">
 					<Link href="/manageproperty" passHref>
 						<Image
 							src={manageProperty}
@@ -37,7 +37,7 @@ export default function Index() {
 						</p>
 					</Link>
 				</div>
-				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:mr-[50%] lg:mt-0 mt-5">
+				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:mr-[50%] lg:mt-0 mt-5 hover:opacity-80">
 					<Link href="/generate" passHref>
 						<Image
 							src={generateDocuments}
@@ -53,7 +53,7 @@ export default function Index() {
 						</p>
 					</Link>
 				</div>
-				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:ml-[50%] lg:mt-0 mt-5">
+				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:ml-[50%] lg:mt-0 mt-5 hover:opacity-80">
 					{/* Coming Soon */}
 					<Link href="/guide" passHref>
 						<button>
@@ -71,7 +71,7 @@ export default function Index() {
 						</button>
 					</Link>
 				</div>
-				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:mr-[50%] lg:mt-0 mt-5">
+				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:mr-[50%] lg:mt-0 mt-5 hover:opacity-80">
 					{/* Coming Soon */}
 					<Link href="/ComingSoon" passHref>
 						<button>

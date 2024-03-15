@@ -39,19 +39,17 @@ export default function ManageProperty() {
 				<h1 className="text-4xl font-bold text-primary mb-10">
 					Manage Property
 				</h1>
-				<div className="lg:w-[80%] mx-auto flex flex-col md:flex-row justify-around items-center md:flex-wrap">
+				<div className="flex flex-col lg:flex-row lg:justify-evenly items-center flex-wrap">
 					{houses?.map((house) => {
 						return (
-							<Property address={house} key={house} className="m-[50px]" />
+							<Property
+								address={house}
+								key={house}
+								className="mt-10 mx-[25px]"
+							/>
 						);
 					})}
-					<AddProperty className="m-[50px]" />
-					<button
-						className="p-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300 ease-in-out"
-						onClick={getPropertyDetails}
-					>
-						Get Property Details
-					</button>
+					<AddProperty className="mt-10 mx-[25px]" />
 				</div>
 			</div>
 		</>

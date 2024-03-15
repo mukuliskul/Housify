@@ -174,7 +174,7 @@ export default function AddProperty() {
 						className="w-[215px] bg-primary h-[51px] rounded-2xl"
 						type="submit"
 					>
-						<p className="py-[5px] text-[20px] font-[500] text-white text-center">
+						<p className="py-[5px] text-[20px] font-[500] text-white text-center mb-10">
 							Submit
 						</p>
 					</button>

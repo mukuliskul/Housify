@@ -6,7 +6,7 @@ export default function Utility(props) {
 	return (
 		<>
 			<div>
-				<div className="grid grid-cols-1 lg:grid-cols-2 mb-2">
+				<div className="mb-2 flex flex-row rows-1 justify-between items-center">
 					<div>
 						<p>
 							<strong>File: </strong>
@@ -17,6 +17,9 @@ export default function Utility(props) {
 							{props.utility.next_due}
 						</p>
 					</div>
+					<button className="flex justify-center items-center flex-col h-[40px] w-[120px] bg-[#D0D0D0] border rounded-2xl hover:bg-[#EFEFEF]">
+						View
+				</button>
 				</div>
 			</div>
 		</>
