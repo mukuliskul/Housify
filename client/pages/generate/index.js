@@ -3,9 +3,9 @@ import fileIcon from '@/public/icons/file-icon.svg';
 
 export default function Generate() {
   return (
-    <div className="grid grid-cols-10 text-black kumbh-sans-font">
-      <div className="col-span-10 lg:col-span-7">
-        <h1 className="text-4xl font-bold text-primary mb-10">Generate Documents</h1>
+    <div className="grid lg:grid-cols-2 grid-col-1 text-black kumbh-sans-font"> 
+      <div> 
+        <h1 className="text-4xl font-bold text-primary mb-2 lg:mb-10">Generate Documents</h1>
         <form className="flex flex-col flex-start">
           <div>
             <label className="block font-semibold text-3xl">Select Document:</label>
@@ -23,22 +23,26 @@ export default function Generate() {
               <Image src={fileIcon} alt="file icon" className="mx-auto py-[50%]" />
             </div>
             <div className="flex flex-col max-w-[350px] justify-around m-5 space-y-5">
-              <button type="button" className="w-full bg-primary h-14 rounded-2xl text-white font-medium text-xl">
+              <button type="button" className="w-full bg-primary h-14 rounded-2xl text-white font-medium text-xl px-2">
                 Generate document with AI
               </button>
-              <button type="button" className="w-full bg-primary h-12 rounded-2xl text-white font-medium text-lg">
+              <button type="button" className="w-full bg-primary h-12 rounded-2xl text-white font-medium text-lg px-2">
                 Download Document
               </button>
             </div>
           </div>
         </form>
       </div>
-      <div className="col-span-10 lg:col-span-3">
-        <div className="border w-full rounded-t-lg border-black lg:mt-0 mt-10">
+      <div className="flex flex-col">
+        <h1 className="text-4xl font-bold text-primary mb-2 lg:mb-10 lg:mt-0 mt-10">Interpret Documents</h1>
+        <div className="border w-full lg:max-w-xl rounded-t-lg border-black">
           <div className="bg-primary rounded-t-lg text-center p-2 text-white font-medium text-lg">Ask AI for Help</div>
-          <div className="bg-gray-200 h-[70vh]"></div>
-          <div className="bg-white border-t border-black p-2">
-            <input type="text" className="w-full rounded-lg border border-black cursor-not-allowed" readOnly value="Coming soon..." />
+          <div className="bg-gray-200 h-[60vh]"></div>
+          <div className="flex flex-row bg-white border-t border-black p-2">
+          <button type="button" className="w-auto bg-primary h-auto pb-2 px-3 mr-2 rounded-2xl text-white font-medium text-3xl cursor-not-allowed">
+                +
+              </button>
+            <input type="text" className="w-full px-2 rounded-lg border border-black cursor-not-allowed" readOnly value="Coming soon..." />
           </div>
         </div>
       </div>
