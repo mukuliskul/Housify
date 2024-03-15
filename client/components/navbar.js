@@ -12,15 +12,13 @@ export default function Navbar() {
   return (
     <>
 	<nav className="lg:px-10 px-5 flex w-full flex-col lg:flex-row lg:justify-evenly h-[100%] font-medium text-[20px] items-center border-black border-b-[1px] text-primary lg:pb-0 pb-2">
-		{/* <div className="flex items-center flex-shrink-0"> */}
 		<Link href="/" passHref>
 			<Image src={"/icons/Nav-logo.svg"} width={200} height={200} />
 		</Link>
-		{/* </div> */}
 		<div className="block lg:hidden">
 		<button
 			onClick={() => setIsOpen(!isOpen)}
-			className="flex items-center px-3 py-2 border bg-primary rounded text-black border-black font-extrabold hover:bg-white"
+			className="flex items-center px-3 py-2 border bg-white rounded text-black border-black border-2px font-extrabold hover:bg-[#909090]"
 		>
 			<svg
 			className="fill-current h-3 w-3"
