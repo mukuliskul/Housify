@@ -7,6 +7,7 @@ contract HouseOwnershipRegistry {
 
     // house address is mapped to the owner
     mapping(string => Owner) public houseRegistry;
+    string[] private houseAddresses;
 
     function registerHouse(string memory houseAddress, string memory documentIPFSHash) public {
         // Ensure the house is not already registered
@@ -16,6 +17,9 @@ contract HouseOwnershipRegistry {
         Owner storage newOwner = houseRegistry[houseAddress];
         newOwner.owner = msg.sender;
         newOwner.documentIPFSHash = documentIPFSHash;
+
+        // add houseAddress to array
+        houseAddresses.push(houseAddress);
 
         // Emit event
         emit HouseRegistered(houseAddress, msg.sender);
@@ -61,6 +65,27 @@ contract HouseOwnershipRegistry {
     }
 
     // Read
+    function getPropertyAddress(address caller) public view returns (string[] memory) {
+        string[] memory properties = new string[](houseAddresses.length);
+        uint count = 0;
+        for (uint i = 0; i < houseAddresses.length; i++) {
+            if (houseRegistry[houseAddresses[i]].owner == caller) {
+                properties[count] = houseAddresses[i];
+                count++;
+            }
+        }
+        if(count > 0){
+            // Resize the array to fit the actual number of properties
+            string[] memory callerProperties = new string[](count);
+            for (uint i = 0; i < count; i++) {
+                callerProperties[i] = properties[i];
+            }
+            return callerProperties;
+        }else{
+            revert NoProperties(caller);
+        }
+    }
+
     function getDocumentHash(string memory houseAddress) public view returns (string memory) {
         verifyOwner(houseAddress, msg.sender);
 

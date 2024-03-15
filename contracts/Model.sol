@@ -31,6 +31,7 @@ event PropertyTaxReceiptUpdated(string houseAddress, uint256 startDate, uint256 
 // Errors to revert
 error PropertyNotRegistered(string houseAddress);
 error NotOwner(address caller, string houseAddress);
+error NoProperties(address caller);
 
 struct Document{
     string documentCID; 
