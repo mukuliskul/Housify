@@ -31,10 +31,9 @@ export default function Generate() {
             </div>
             <div className="flex flex-col max-w-[350px] justify-around m-5 space-y-5">
               <button type="button" className="w-full bg-primary h-14 rounded-2xl text-white font-medium text-xl px-2">
-                Generate document with AI
-                <Image src={aiLogo} className="inline h-[0.8em]"></Image>
+                Generate document with AI<Image src={aiLogo} className="inline h-[0.7em] mb-2"></Image>
               </button>
-              <button type="button" className="w-full bg-primary h-12 rounded-2xl text-white font-medium text-lg px-2">
+              <button type="button" className="w-full bg-primary h-12 rounded-2xl text-white font-medium text-xl px-2">
                 Download Document
               </button>
             </div>
