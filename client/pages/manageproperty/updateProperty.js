@@ -11,18 +11,17 @@ export default function UpdateProperty() {
     // fetch("/api/uploadNewProperty", { method: "POST", body: formData });
     setIsSubmitted(true);
   }
-  return isSubmitted ? (
-    submissionIsSuccessful ? (
-      <Success message="Property updated successfully"></Success>
-    ) : (
-      <Failed message="Property update failed"></Failed>
-    )
+  return isSubmitted && submissionIsSuccessful ? (
+    <Success message="Property updated successfully"></Success>
   ) : (
     <>
       <div className="h-[8vh] text-black kumbh-sans-font">
         <h1 className="text-4xl font-bold text-primary mb-10">
           Update Property
         </h1>
+        {isSubmitted && !submissionIsSuccessful ? (
+          <Failed message="Please check your data and try again."></Failed>
+        ) : null}
         <form
           method="post"
           onSubmit={handleSubmit}
@@ -129,6 +128,7 @@ export default function UpdateProperty() {
               multiple
             />
           </label>
+
           <button
             className="w-[215px] bg-primary h-[51px] rounded-2xl"
             type="submit"
