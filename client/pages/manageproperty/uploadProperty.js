@@ -1,3 +1,4 @@
+import UpdateFailed from "@/components/updateFailed";
 import { useRouter } from "next/router";
 
 const { ethers } = require("ethers");
@@ -43,7 +44,6 @@ export default function AddProperty() {
 			await provider.send("eth_requestAccounts", []);
 			const signer = provider.getSigner();
 			const address = await signer.getAddress(); // Fetch the signer's address
-			console.log(address);
 
 			formData.append("callerAddress", address);
 
@@ -61,11 +61,11 @@ export default function AddProperty() {
 				data.ipfsHashes.title,
 				signer
 			);
-			console.log("Success:", data);
 			if (success) {
 				router.push("/manageproperty");
 			}
 		} catch (error) {
+			UpdateFailed(error.message);
 			console.error("Error during form submission:", error.message);
 		}
 	}

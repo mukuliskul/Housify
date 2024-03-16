@@ -4,7 +4,20 @@ import AddProperty from "@/components/addPropertyButton.js";
 import { useEffect, useState } from "react";
 
 export default function ManageProperty() {
-	const [houses, setHouses] = useState([]);
+	const [properties, setProperties] = useState([]);
+
+	async function getIPFShash(houseAddress, provider, contract) {
+		try {
+			let ipfsHash = await contract.getDocumentHash(houseAddress);
+			console.log(ipfsHash);
+			return ipfsHash;
+		} catch (error) {
+			console.error(
+				"Error getting IPFS hash for address " + houseAddress + ": ",
+				error
+			);
+		}
+	}
 
 	async function getAllProperties() {
 		try {
@@ -23,21 +36,25 @@ export default function ManageProperty() {
 			);
 
 			let ownedProperties = await contract.getPropertyAddress(address);
-			console.log(ownedProperties);
-			setHouses(ownedProperties);
-			/* 
-			for (const propertyAddress of ownedProperties) {
-				const documentHash = await contract.getDocumentHash(propertyAddress);
-				console.log(`Property ${propertyAddress} hash: `, documentHash);
-			} */
+			const propertyDetails = await Promise.all(
+				ownedProperties.map(async (house) => {
+					const cin = await getIPFShash(house, provider, contract);
+					console.log(cin);
+					return { address: house, cin };
+				})
+			);
+			setProperties(propertyDetails);
+			console.log(properties);
 		} catch (error) {
-			console.error("Error getting IPFS hash: ", error);
+			console.error("Error getting properties ", error);
 		}
 	}
 
 	useEffect(() => {
 		getAllProperties();
 	}, []);
+
+	console.log(properties);
 
 	return (
 		<>
@@ -46,15 +63,14 @@ export default function ManageProperty() {
 					Manage Property
 				</h1>
 				<div className="flex flex-col lg:flex-row lg:justify-evenly items-center flex-wrap">
-					{houses?.map((house) => {
-						return (
-							<Property
-								address={house}
-								key={house}
-								className="mt-10 mx-[25px]"
-							/>
-						);
-					})}
+					{properties.map((property) => (
+						<Property
+							key={property.address}
+							address={property.address}
+							cin={property.cin}
+							className="mt-10 mx-[25px]"
+						/>
+					))}
 					<AddProperty className="mt-10 mx-[25px]" />
 				</div>
 			</div>
