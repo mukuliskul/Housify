@@ -1,7 +1,7 @@
 // pages/_app.js
 import "@/styles/globals.css";
 import Navbar from "@/components/navbar.js";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps }) {
