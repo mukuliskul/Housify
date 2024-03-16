@@ -3,6 +3,7 @@ import Image from "next/image";
 import fileIcon from "@/public/icons/file-icon.svg";
 import aiIcon from "@/public/icons/generate/AiIcon.svg";
 import askAiIcon from "@/public/icons/generate/AskAiIcon.svg";
+import { isMobile, isTablet } from "react-device-detect";
 
 const SUMMARIZE_URL = "/api/summarize";
 

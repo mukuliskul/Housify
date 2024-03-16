@@ -1,24 +1,16 @@
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import manageProperty from "@/public/icons/index/manage-property.svg";
 import generateDocuments from "@/public/icons/index/generate-documents.svg";
 import guide from "@/public/icons/index/guide.svg";
 import profile from "@/public/icons/index/profile.svg";
 import Link from "next/link";
+import { isMobile, isTablet } from "react-device-detect";
 
 export default function Index() {
+	const deviceType = isMobile || isTablet ? "mobile" : "desktop";
 	const router = useRouter();
-	let [width, setWidth] = useState();
-	function handleWindowSize() {
-		setWidth(window.innerWidth);
-	}
-	useEffect(() => {
-		window.addEventListener("resize", handleWindowSize);
-		return () => {
-			window.removeEventListener("resize", handleWindowSize);
-		};
-	});
+
 	return (
 		<div>
 			<div className="grid grid-cols-4 h-[100vh] text-black kumbh-sans-font">
@@ -31,13 +23,13 @@ export default function Index() {
 				</div>
 				<div
 					className={`col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:ml-[50%] lg:mt-0 mt-5 hover:opacity-80% ${
-						width <= 768 ? "opacity-20" : ""
+						deviceType == "mobile" ? "opacity-20" : ""
 					}`}
 				>
 					<Link
-						href={width <= 768 ? "" : "/manageproperty"}
+						href={deviceType == "mobile" ? "" : "/manageproperty"}
 						onClick={() => {
-							width <= 768 &&
+							deviceType == "mobile" &&
 								window.alert("Manage property is not available on phones");
 						}}
 						passHref
