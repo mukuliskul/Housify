@@ -9,7 +9,7 @@ export default function ManageProperty() {
 	async function getIPFShash(houseAddress, provider, contract) {
 		try {
 			let ipfsHash = await contract.getDocumentHash(houseAddress);
-			console.log(ipfsHash);
+			console.log(`${houseAddress} : In Index : ${ipfsHash}`);
 			return ipfsHash;
 		} catch (error) {
 			console.error(
@@ -38,13 +38,16 @@ export default function ManageProperty() {
 			let ownedProperties = await contract.getPropertyAddress(address);
 			const propertyDetails = await Promise.all(
 				ownedProperties.map(async (house) => {
-					const cin = await getIPFShash(house, provider, contract);
-					console.log(cin);
+					const cin = await contract.getDocumentHash(house);
+					console.log(`${house} : In GetAllProperties : ${cin}`);
 					return { address: house, cin };
 				})
 			);
+			console.log(propertyDetails);
 			setProperties(propertyDetails);
-			console.log(properties);
+			properties.map((property) => {
+				console.log(` ${property.address} : In properties : ${property.cin}`);
+			});
 		} catch (error) {
 			console.error("Error getting properties ", error);
 		}
@@ -53,8 +56,6 @@ export default function ManageProperty() {
 	useEffect(() => {
 		getAllProperties();
 	}, []);
-
-	console.log(properties);
 
 	return (
 		<>

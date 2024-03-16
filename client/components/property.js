@@ -20,13 +20,11 @@ export default function Property(props) {
 			<div className="grid grid-rows-2 flex justify-center text-white">
 				<div className="flex flex-row justify-around mt-2">
 					<Link
-						href={`${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${props.cid}`}
+						href={`https://${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${props.cin}`}
 						passHref
+						target="_blank"
 					>
-						<button
-							className="bg-[#E4B300] w-[80px] h-[25px] border border-[#DDDDDD] rounded-md mx-1 hover:text-black hover:bg-white"
-							target="_blank"
-						>
+						<button className="bg-[#E4B300] w-[80px] h-[25px] border border-[#DDDDDD] rounded-md mx-1 hover:text-black hover:bg-white">
 							<p className="text-[15px] font-white drop-shadow-[0px_4px_4px_rgba(0, 0, 0, 0.25);]">
 								Export
 							</p>

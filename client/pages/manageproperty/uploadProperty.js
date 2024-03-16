@@ -58,9 +58,10 @@ export default function AddProperty() {
 			const data = await response.json(); // Extract the JSON response
 			let success = await registerPropertyOnBlockchain(
 				data.propertyAddress,
-				data.ipfsHashes.title,
+				data.ipfsHashes.title.IpfsHash,
 				signer
 			);
+			console.log(data.ipfsHashes.title.IpfsHash);
 			if (success) {
 				router.push("/manageproperty");
 			}
