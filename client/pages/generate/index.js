@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import fileIcon from "@/public/icons/file-icon.svg";
-import aiLogo from "@/public/icons/generate/ailogo.svg";
+import aiIcon from "@/public/icons/generate/AiIcon.svg";
+import askAiIcon from "@/public/icons/generate/askAiIcon.svg";
 
 const SUMMARIZE_URL = "/api/summarize";
 
@@ -162,11 +163,7 @@ export default function Generate() {
                 className="w-full bg-primary h-14 rounded-2xl text-white font-medium text-xl px-2 hover:bg-[#5280F2]"
               >
                 Generate document with AI
-                <Image
-                  src={aiLogo}
-                  className="inline h-[0.7em] mb-2"
-                  alt="AI Logo"
-                ></Image>
+                <Image src={aiIcon} className="inline h-[0.7em] mb-2"></Image>
               </button>
               <button
                 type="button"
@@ -184,7 +181,7 @@ export default function Generate() {
         </h1>
         <div className="border w-full lg:max-w-xl rounded-t-lg border-black">
           <div className="bg-primary rounded-t-lg text-center p-2 text-white font-medium text-lg">
-            Ask AI for Help
+            <Image src={askAiIcon}className="inline"/>Ask AI for Help
           </div>
           <div className="h-[60vh] overflow-y-auto flex flex-col">
             {messages.map((msg, index) => (

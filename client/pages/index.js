@@ -14,7 +14,6 @@ export default function Index() {
     setWidth(window.innerWidth);
   }
   useEffect(() => {
-    console.log(width);
     window.addEventListener("resize", handleWindowSize);
     return () => {
       window.removeEventListener("resize", handleWindowSize);
@@ -32,10 +31,10 @@ export default function Index() {
         </div>
         <div
           className={`col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:ml-[50%] lg:mt-0 mt-5 hover:opacity-80% ${
-            width <= 768 ? "opacity-20" : ""
+            innerWidth <= 768 ? "opacity-20" : ""
           }`}
         >
-          <Link href={width <= 768? "":"/manageproperty"} onClick={()=>{width<=768 && window.alert("Manage property is not available on phones")}} passHref>
+          <Link href={innerWidth <= 768? "":"/manageproperty"} onClick={()=>{innerWidth<=768 && window.alert("Manage property is not available on phones")}} passHref>
             <Image
               src={manageProperty}
               height={400}
