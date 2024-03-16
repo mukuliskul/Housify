@@ -6,6 +6,7 @@ const { ethers } = require("ethers");
 // Contract details
 
 export default function AddProperty() {
+	let router = useRouter();
 	async function registerPropertyOnBlockchain(
 		propertyAddress,
 		titleIpfsHash,
@@ -25,9 +26,11 @@ export default function AddProperty() {
 			await tx.wait(); // Wait for the transaction to be mined
 
 			console.log("Property registered successfully:", tx.hash);
+			return true;
 			//return res.status(200).json({ success: true, transactionHash: tx.hash });
 		} catch (error) {
 			console.error("Error registering property:", error);
+			return false;
 			//return res.status(500).json({ error: "Failed to register house" });
 		}
 	}
@@ -53,7 +56,7 @@ export default function AddProperty() {
 				throw new Error(`HTTP error! status: ${response.status}`);
 			}
 			const data = await response.json(); // Extract the JSON response
-			await registerPropertyOnBlockchain(
+			let success = await registerPropertyOnBlockchain(
 				data.propertyAddress,
 				data.ipfsHashes.title,
 				signer
@@ -95,7 +98,8 @@ export default function AddProperty() {
 							name="postal-code"
 							id="postal-code"
 							placeholder="Postal Code"
-							pattern="^[A-Za-z]\d[A-Za-z]\s?\d[A-Za-z]\d$"
+							pattern="^[A-Z]\d[A-Z]\s\d[A-Z]\d$"
+							title={`'A1A 1A1'`}
 							className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
 							required
 						/>
@@ -180,7 +184,7 @@ export default function AddProperty() {
 						className="w-[215px] bg-primary h-[51px] rounded-2xl"
 						type="submit"
 					>
-						<p className="py-[5px] text-[20px] font-[500] text-white text-center">
+						<p className="py-[5px] text-[20px] font-[500] text-white text-center mb-10">
 							Submit
 						</p>
 					</button>

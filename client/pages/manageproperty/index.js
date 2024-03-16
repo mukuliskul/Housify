@@ -1,6 +1,7 @@
 const ethers = require("ethers");
 import Property from "@/components/property.js";
 import AddProperty from "@/components/addPropertyButton.js";
+import { useEffect, useState } from "react";
 
 export default function ManageProperty() {
 	const [properties, setProperties] = useState([]);
@@ -25,8 +26,8 @@ export default function ManageProperty() {
 
 			const provider = new ethers.providers.Web3Provider(window.ethereum);
 			await provider.send("eth_requestAccounts", []);
-			const signer = provider.getSigner();
-			const address = await signer.getAddress(); // Fetch the signer's address
+			const signer = await provider.getSigner();
+			const address = await signer.getAddress();
 
 			const contract = new ethers.Contract(
 				contractAddress,
