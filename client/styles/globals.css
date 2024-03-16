@@ -35,8 +35,7 @@
 }
 
 body {
-	background-color: white;
-	
+	color: white;
 }
 
 @layer utilities {

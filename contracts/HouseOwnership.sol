@@ -44,6 +44,7 @@ contract HouseOwnershipRegistry {
         emit LeaseAdded(houseAddress, documentIPFSHash, startDate, endDate, tenantName);
     }
 
+    // TODO: INCLUDE apporpriate checks for edge cases in frontend
     function addUtilityBill(string memory houseAddress, string memory documentIPFSHash, uint256 startDate, uint256 endDate, uint256 amount) public{
         verifyOwner(houseAddress, msg.sender);
         Document memory newDocument = Document(documentIPFSHash, block.timestamp);
@@ -53,6 +54,7 @@ contract HouseOwnershipRegistry {
         emit UtilityBillAdded(houseAddress, documentIPFSHash, startDate, endDate, amount);
     }
 
+    // TODO: INCLUDE apporpriate checks for edge cases in frontend
     function addPropertyTax(string memory houseAddress, string memory documentIPFSHash, uint256 startDate, uint256 endDate, uint256 amount) public{
         verifyOwner(houseAddress, msg.sender);
         Document memory newDocument = Document(documentIPFSHash, block.timestamp);
@@ -203,55 +205,4 @@ contract HouseOwnershipRegistry {
     }
     
     // Update
-    function updatePropertyAddress(string memory currentHouseAddress, string memory newHouseAddress) public {
-        verifyOwner(currentHouseAddress, msg.sender);
-        require(bytes(newHouseAddress).length > 0, "New address cannot be empty.");
-        require(houseRegistry[newHouseAddress].owner == address(0), "New address already in use.");
-
-        // Initialize the new property with the current property's data
-        Owner storage currentOwner = houseRegistry[currentHouseAddress];
-        Owner storage newOwner = houseRegistry[newHouseAddress];
-        newOwner.owner = currentOwner.owner;
-        newOwner.documentIPFSHash = currentOwner.documentIPFSHash;
-        
-        // Manually copy leases, utility bills, and property tax receipts
-        delete newOwner.leases; // Clear any existing data
-        for (uint i = 0; i < currentOwner.leases.length; i++) {
-            newOwner.leases.push(currentOwner.leases[i]);
-        }
-        
-        delete newOwner.utilityBills; // Clear any existing data
-        for (uint i = 0; i < currentOwner.utilityBills.length; i++) {
-            newOwner.utilityBills.push(currentOwner.utilityBills[i]);
-        }
-
-        delete newOwner.propertyTaxReceipts; // Clear any existing data
-        for (uint i = 0; i < currentOwner.propertyTaxReceipts.length; i++) {
-            newOwner.propertyTaxReceipts.push(currentOwner.propertyTaxReceipts[i]);
-        }
-
-        // Update the houseAddresses array
-        for (uint i = 0; i < houseAddresses.length; i++) {
-            if (keccak256(abi.encodePacked(houseAddresses[i])) == keccak256(abi.encodePacked(currentHouseAddress))) {
-                houseAddresses[i] = newHouseAddress;
-                break;
-            }
-        }
-
-        // Finally, remove the old property
-        delete houseRegistry[currentHouseAddress];
-
-        emit HouseAddressUpdated(currentHouseAddress, newHouseAddress);
-    }
-
-
-
-    function updatePropertyIpfsHash(string memory currentHouseAddress, string memory newIpfsHash) public {
-        verifyOwner(currentHouseAddress, msg.sender);
-        require(bytes(newIpfsHash).length > 0, "IPFS hash cannot be empty.");
-
-        houseRegistry[currentHouseAddress].documentIPFSHash = newIpfsHash;
-
-        emit IpfsHashUpdated(currentHouseAddress, newIpfsHash);
-    }
 }

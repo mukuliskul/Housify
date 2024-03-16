@@ -5,7 +5,7 @@ import addHouseIcon from "@/public/icons/add-house-icon.svg";
 export default function AddProperty(props) {
 	return (
 		<Link href="/manageproperty/uploadProperty" passHref>
-			<button className={`${props.className} flex justify-center items-center flex-col h-[300px] w-[300px] bg-[#D0D0D0] border rounded-3xl hover:bg-[#EFEFEF]`}>
+			<button className={`${props.className} flex justify-center items-center flex-col h-[300px] w-[300px] bg-[#EFEFEF] border rounded-3xl hover:bg-[#D0D0D0]`}>
 				<div>
 					<Image src={yellowHouseIcon} className="pb-[10px]" />
 				</div>

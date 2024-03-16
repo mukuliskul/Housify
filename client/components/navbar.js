@@ -9,21 +9,15 @@ export default function Navbar() {
 	function handleLogout() {
 		router.push("/login");
 	}
-
-	function handleLinkClick() {
-		setIsOpen(false);
-	}
-
 	return (
 		<>
 			<nav className="lg:px-10 px-5 flex w-full flex-col lg:flex-row lg:justify-evenly h-[100%] font-medium text-[20px] items-center border-black border-b-[1px] text-primary lg:pb-0 pb-2">
-				<Link href="/" passHref onClick={handleLinkClick}>
+				<Link href="/" passHref>
 					<Image
 						src={"/icons/Nav-logo.svg"}
 						width={200}
 						height={200}
 						alt="Housify icon"
-						className="hover:opacity-80"
 						priority={true}
 					/>
 				</Link>
@@ -45,31 +39,16 @@ export default function Navbar() {
 				<div
 					className={`${
 						isOpen ? "block" : "hidden"
-					} block lg:flex-grow lg:px-10 px-5 flex w-full flex-col lg:flex-row lg:justify-around items-center text-primary lg:flex font-bold`}
+					} block lg:flex-grow lg:px-10 px-5 flex w-full flex-col lg:flex-row lg:justify-around items-center text-primary lg:flex`}
 				>
 					<Link href="/" passHref legacyBehavior>
-						<a
-							className="block lg:inline-block  hover:text-[#5280F2]"
-							onClick={handleLinkClick}
-						>
-							Home
-						</a>
+						<a className="block lg:inline-block">Home</a>
 					</Link>
 					<Link href="/about" passHref legacyBehavior>
-						<a
-							className="block lg:inline-block  hover:text-[#5280F2]"
-							onClick={handleLinkClick}
-						>
-							About
-						</a>
+						<a className="block lg:inline-block">About</a>
 					</Link>
 					<Link href="/features" passHref legacyBehavior>
-						<a
-							className="block lg:inline-block  hover:text-[#5280F2]"
-							onClick={handleLinkClick}
-						>
-							Features
-						</a>
+						<a className="block lg:inline-block">Features</a>
 					</Link>
 					<button
 						className="bg-primary text-white border-[1px] rounded-3xl h-[33px] w-[80px] font-extrabold hover:bg-[#5280F2]"

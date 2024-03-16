@@ -24,8 +24,6 @@ event LeaseRemoved(string houseAddress, uint256 startDate, uint256 endDate, stri
 event UtilityBillRemoved(string houseAddress, uint256 startDate, uint256 endDate, uint256 amount);
 event PropertTaxReceiptRemoved(string houseAddress, uint256 startDate, uint256 endDate, uint256 amount);
 // updation
-event HouseAddressUpdated(string currentHouseAddress, string newHouseAddress);
-event IpfsHashUpdated(string houseAddress, string newIpfsHash);
 event LeaseUpdated(string houseAddress, uint256 startDate, uint256 endDate, string tenantName);
 event UtilityBillUpdated(string houseAddress, uint256 startDate, uint256 endDate, uint256 amount);
 event PropertyTaxReceiptUpdated(string houseAddress, uint256 startDate, uint256 endDate, uint256 amount);
