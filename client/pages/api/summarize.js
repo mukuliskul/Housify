@@ -2,6 +2,8 @@ import OpenAI from "openai";
 
 const openai = new OpenAI();
 
+let chatSessions = {};
+
 export default async function handler(req, res) {
 	const { sessionId, text, isInitialMessage } = req.body;
 	try {
@@ -14,7 +16,11 @@ export default async function handler(req, res) {
 				},
 			];
 		} else {
-			messages = chatSessions[sessionId] || [];
+			// Ensure chatSessions[sessionId] is initialized as an array
+			if (!chatSessions[sessionId]) {
+				chatSessions[sessionId] = [];
+			}
+			messages = chatSessions[sessionId];
 			messages.push({ role: "user", content: text });
 		}
 
