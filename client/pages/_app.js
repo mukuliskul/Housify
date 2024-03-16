@@ -8,26 +8,31 @@ function MyApp({ Component, pageProps }) {
 	const router = useRouter();
 
 	useEffect(() => {
-		// Directly determine device type to avoid unnecessary operations on mobile/tablets.
+		// Determine the device type to avoid unnecessary operations on mobile/tablets.
 		const deviceType = isMobile || isTablet ? "mobile" : "desktop";
 
-		// For desktop devices, check for Ethereum/MetaMask presence.
 		if (deviceType === "desktop") {
+			// For desktop devices, proceed with checking for Ethereum/MetaMask presence.
 			if (typeof window !== "undefined" && window.ethereum) {
 				window.ethereum.request({ method: "eth_accounts" }).then((accounts) => {
-					// If no accounts found and viewport width suggests desktop, redirect to login.
-					if (accounts.length === 0 && window.innerWidth >= 768) {
+					// Redirect to login if no accounts found and the viewport suggests desktop.
+					if (
+						accounts.length === 0 &&
+						window.innerWidth >= 768 &&
+						router.pathname !== "/login"
+					) {
 						router.push("/login");
 					}
 				});
 			}
+		} else if (deviceType === "mobile" && router.pathname == "/login") {
+			router.push("/");
 		}
-
-		// Cleanup function if needed, though it's empty here.
+		// The cleanup function here is kept for potential future use, it's currently not required.
 		return () => {};
-	}, [router]); // Dependencies adjusted for clarity, though it should run once.
+	}, [router]); // Depend on 'router' to ensure this effect is correctly triggered.
 
-	// Control display of Navbar based on route.
+	// Control the display of Navbar based on the route.
 	const showNavbar = router.pathname !== "/login";
 
 	return (
