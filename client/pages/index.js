@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import manageProperty from "@/public/icons/index/manage-property.svg";
 import generateDocuments from "@/public/icons/index/generate-documents.svg";
@@ -9,9 +9,17 @@ import Link from "next/link";
 
 export default function Index() {
 	const router = useRouter();
-	// useEffect(()=>{
-	// router.push('/login')
-	// })
+	let [width, setWidth] = useState();
+	function handleWindowSize() {
+		setWidth(window.innerWidth);
+	}
+	useEffect(() => {
+		console.log(width);
+		window.addEventListener("resize", handleWindowSize);
+		return () => {
+			window.removeEventListener("resize", handleWindowSize);
+		};
+	});
 	return (
 		<div>
 			<div className="grid grid-cols-4 h-[100vh] text-black kumbh-sans-font">
@@ -22,8 +30,19 @@ export default function Index() {
 						with ease. Let Housify simplify your property ownership journey.
 					</p>
 				</div>
-				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:ml-[50%] lg:mt-0 mt-5">
-					<Link href="/manageproperty" passHref>
+				<div
+					className={`col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:ml-[50%] lg:mt-0 mt-5 hover:opacity-80% ${
+						width <= 768 ? "opacity-20" : ""
+					}`}
+				>
+					<Link
+						href={width <= 768 ? "" : "/manageproperty"}
+						onClick={() => {
+							width <= 768 &&
+								window.alert("Manage property is not available on phones");
+						}}
+						passHref
+					>
 						<Image
 							src={manageProperty}
 							height={400}
@@ -37,7 +56,7 @@ export default function Index() {
 						</p>
 					</Link>
 				</div>
-				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:mr-[50%] lg:mt-0 mt-5">
+				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:mr-[50%] lg:mt-0 mt-5 hover:opacity-80">
 					<Link href="/generate" passHref>
 						<Image
 							src={generateDocuments}
@@ -46,14 +65,13 @@ export default function Index() {
 							alt="Generate Documents Icon"
 						/>
 						<p className="kumbh-sans font-bold text-white text-[20px]">
-							Generate /
-							Interpret
+							Generate / Interpret
 							<br />
 							Documents
 						</p>
 					</Link>
 				</div>
-				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:ml-[50%] lg:mt-0 mt-5">
+				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:ml-[50%] lg:mt-0 mt-5 hover:opacity-80">
 					{/* Coming Soon */}
 					<Link href="/guide" passHref>
 						<button>
@@ -71,7 +89,7 @@ export default function Index() {
 						</button>
 					</Link>
 				</div>
-				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:mr-[50%] lg:mt-0 mt-5">
+				<div className="col-span-4 h-[300px] w-[300px] sm:h-[200px] sm:w-[200px] sm:col-span-2 lg:h-[200px] lg:w-[200px] md:w-[200px] md:h-[200px] manage-property text-center items-center mx-auto lg:mr-[50%] lg:mt-0 mt-5 hover:opacity-80">
 					{/* Coming Soon */}
 					<Link href="/ComingSoon" passHref>
 						<button>
