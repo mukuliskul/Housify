@@ -7,31 +7,36 @@ import askAiIcon from "@/public/icons/generate/AskAiIcon.svg";
 const SUMMARIZE_URL = "/api/summarize";
 
 export default function Generate() {
-	//Stores all text messages
 	const [messages, setMessages] = useState([
 		{ sender: "system", content: "Please upload the file to be summarized" },
 	]);
 
 	const [sessionId, setSessionId] = useState("");
+
 	const [userInput, setUserInput] = useState("");
 
 	//Will be used to show loading message to user later
 	const [isLoading, setIsLoading] = useState(false);
-
 	//Calls api and adds the response to messages
 	const summarizeText = (text) => {
-		// setIsLoading(true);
+		const newSessionId = Date.now().toString(); // Generate a unique session ID
+		setSessionId(newSessionId); // Set the session ID
+
+		//setIsLoading(true);
 		fetch(SUMMARIZE_URL, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ text }),
+			body: JSON.stringify({
+				text,
+				sessionId: newSessionId,
+				isInitialMessage: true,
+			}),
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				// setIsLoading(false);
-				// Update to use setMessages to show summary in chat
+				//setIsLoading(false);
 				setMessages((prev) => [
 					...prev,
 					{ sender: "system", content: data.message },
@@ -39,7 +44,7 @@ export default function Generate() {
 			})
 			.catch((error) => {
 				console.error("Error summarizing text:", error);
-				// setIsLoading(false);
+				//setIsLoading(false);
 			});
 	};
 
@@ -85,6 +90,32 @@ export default function Generate() {
 	//Adds a user message to messages if its not empty
 	const sendMessage = () => {
 		if (!userInput.trim()) return;
+
+		setIsLoading(true);
+		fetch(SUMMARIZE_URL, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				text: userInput,
+				sessionId,
+				isInitialMessage: false,
+			}),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				setIsLoading(false);
+				setMessages((prev) => [
+					...prev,
+					{ sender: "system", content: data.message },
+				]);
+			})
+			.catch((error) => {
+				console.error("Error sending message:", error);
+				setIsLoading(false);
+			});
+
 		setMessages((prev) => [...prev, { sender: "user", content: userInput }]);
 		setUserInput("");
 	};
