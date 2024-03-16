@@ -3,7 +3,22 @@ import Property from "@/components/property.js";
 import AddProperty from "@/components/addPropertyButton.js";
 
 export default function ManageProperty() {
-	async function getPropertyDetails() {
+	const [properties, setProperties] = useState([]);
+
+	async function getIPFShash(houseAddress, provider, contract) {
+		try {
+			let ipfsHash = await contract.getDocumentHash(houseAddress);
+			console.log(ipfsHash);
+			return ipfsHash;
+		} catch (error) {
+			console.error(
+				"Error getting IPFS hash for address " + houseAddress + ": ",
+				error
+			);
+		}
+	}
+
+	async function getAllProperties() {
 		try {
 			const contractABI = require("@/utils/HouseOwnershipRegistryABI.json");
 			const contractAddress = process.env.NEXT_PUBLIC_DEPLOYED_CONTRACT_ADDRESS;
@@ -19,21 +34,27 @@ export default function ManageProperty() {
 				signer
 			);
 
-			const ownedProperties = await contract.getDocumentHash(address);
-
-			for (const propertyAddress of ownedProperties) {
-				const documentHash = await contract.getDocumentHash(propertyAddress);
-				console.log(`Property ${propertyAddress} hash: `, documentHash);
-			}
+			let ownedProperties = await contract.getPropertyAddress(address);
+			const propertyDetails = await Promise.all(
+				ownedProperties.map(async (house) => {
+					const cin = await getIPFShash(house, provider, contract);
+					console.log(cin);
+					return { address: house, cin };
+				})
+			);
+			setProperties(propertyDetails);
+			console.log(properties);
 		} catch (error) {
-			console.error("Error getting IPFS hash: ", error);
-			//return res.status(500).json({ error: "Failed to register house" });
+			console.error("Error getting properties ", error);
 		}
 	}
-	let houses = [
-		"99 xyz avenue, North York, ON M2H 2K1",
-		"999 xyz street, North York, ON M2H 1K8",
-	];
+
+	useEffect(() => {
+		getAllProperties();
+	}, []);
+
+	console.log(properties);
+
 	return (
 		<>
 			<div className="w-[100%] h-[100vh] text-black kumbh-sans-font">
@@ -41,15 +62,14 @@ export default function ManageProperty() {
 					Manage Property
 				</h1>
 				<div className="flex flex-col lg:flex-row lg:justify-evenly items-center flex-wrap">
-					{houses?.map((house) => {
-						return (
-							<Property
-								address={house}
-								key={house}
-								className="mt-10 mx-[25px]"
-							/>
-						);
-					})}
+					{properties.map((property) => (
+						<Property
+							key={property.address}
+							address={property.address}
+							cin={property.cin}
+							className="mt-10 mx-[25px]"
+						/>
+					))}
 					<AddProperty className="mt-10 mx-[25px]" />
 				</div>
 			</div>

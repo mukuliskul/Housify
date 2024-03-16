@@ -1,75 +1,27 @@
-import UpdateFailed from "@/components/updateFailed";
-import { useRouter } from "next/router";
-
-const { ethers } = require("ethers");
-
-// Contract details
-
-export default function AddProperty() {
-	async function registerPropertyOnBlockchain(
-		propertyAddress,
-		titleIpfsHash,
-		signer
-	) {
-		try {
-			const contractABI = require("@/utils/HouseOwnershipRegistryABI.json");
-			const contractAddress = process.env.NEXT_PUBLIC_DEPLOYED_CONTRACT_ADDRESS;
-
-			const contract = new ethers.Contract(
-				contractAddress,
-				contractABI,
-				signer
-			);
-			const tx = await contract.registerHouse(propertyAddress, titleIpfsHash);
-
-			await tx.wait(); // Wait for the transaction to be mined
-
-			console.log("Property registered successfully:", tx.hash);
-			//return res.status(200).json({ success: true, transactionHash: tx.hash });
-		} catch (error) {
-			console.error("Error registering property:", error);
-			//return res.status(500).json({ error: "Failed to register house" });
-		}
-	}
-
+import { useState } from "react";
+import Success from "@/components/updateSuccess.js";
+import Failed from "@/components/updateFailed.js";
+export default function UpdateProperty() {
+	let [isSubmitted, setIsSubmitted] = useState(false);
+	let [submissionIsSuccessful, setSubmissionIsSuccessful] = useState();
 	async function handleSubmit(e) {
 		e.preventDefault();
 		const form = e.target;
 		const formData = new FormData(form);
-		try {
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
-			await provider.send("eth_requestAccounts", []);
-			const signer = provider.getSigner();
-			const address = await signer.getAddress(); // Fetch the signer's address
-
-			formData.append("callerAddress", address);
-
-			let response = await fetch("/api/uploadNewProperty", {
-				method: "POST",
-				body: formData,
-			});
-
-			if (!response.ok) {
-				throw new Error(`HTTP error! status: ${response.status}`);
-			}
-			const data = await response.json(); // Extract the JSON response
-			await registerPropertyOnBlockchain(
-				data.propertyAddress,
-				data.ipfsHashes.title,
-				signer
-			);
-			if (success) {
-				router.push("/manageproperty");
-			}
-		} catch (error) {
-			UpdateFailed(error.message);
-			console.error("Error during form submission:", error.message);
-		}
+		// fetch("/api/uploadNewProperty", { method: "POST", body: formData });
+		setIsSubmitted(true);
 	}
-	return (
+	return isSubmitted && submissionIsSuccessful ? (
+		<Success message="Property updated successfully"></Success>
+	) : (
 		<>
 			<div className="h-[8vh] text-black kumbh-sans-font">
-				<h1 className="text-4xl font-bold text-primary mb-10">Add Property</h1>
+				<h1 className="text-4xl font-bold text-primary mb-10">
+					Update Property
+				</h1>
+				{isSubmitted && !submissionIsSuccessful ? (
+					<Failed message="Please check your data and try again."></Failed>
+				) : null}
 				<form
 					method="post"
 					onSubmit={handleSubmit}
@@ -83,7 +35,7 @@ export default function AddProperty() {
 							name="street-address"
 							id="street-address"
 							placeholder="Street Address"
-							className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
+							class="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
 							required
 						/>
 					</label>
@@ -96,7 +48,7 @@ export default function AddProperty() {
 							id="postal-code"
 							placeholder="Postal Code"
 							pattern="^[A-Za-z]\d[A-Za-z]\s?\d[A-Za-z]\d$"
-							className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
+							class="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
 							required
 						/>
 					</label>
@@ -108,7 +60,7 @@ export default function AddProperty() {
 							name="city"
 							id="city"
 							placeholder="City"
-							className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
+							class="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
 							required
 						/>
 					</label>
@@ -118,7 +70,7 @@ export default function AddProperty() {
 						<select
 							name="province"
 							id="province"
-							className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
+							class="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
 							required
 						>
 							<option value="">Select a Province</option>
@@ -176,6 +128,7 @@ export default function AddProperty() {
 							multiple
 						/>
 					</label>
+
 					<button
 						className="w-[215px] bg-primary h-[51px] rounded-2xl"
 						type="submit"

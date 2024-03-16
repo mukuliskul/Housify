@@ -75,9 +75,6 @@ export default async function handler(req, res) {
 			},
 			propertyAddress: propertyAddress,
 		});
-
-		//console.log({ identificationProof, title, propertyTax });
-		//res.json({ identificationProof, title, propertyTax });
 	} catch (error) {
 		console.error(error);
 		res.status(500).send("Server Error");
